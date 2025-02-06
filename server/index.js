@@ -1,12 +1,15 @@
 import "dotenv/config"
 import express from "express"
-import session from "express-sessions"
 import cors from "cors"
+import session from "express-sessions"
+import cookieParser from "cookie-parser"
 import passport from "passport"
-import "./strategies/local-strategy.js"
+
+const cookieSecret = process.env.COOKIE_SECRET || "secret"
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser(cookieSecret))
 app.use(cors());
 const port = 8000;
 
