@@ -6,6 +6,7 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import "./strategies/localStrategy.js"
+import authRouter from "./auth/authIndex.js"
 import userRouter from './user/userIndex.js'
 
 const port = process.env.PORT || 8000
@@ -37,6 +38,7 @@ app.use(passport.session());
 //   res.send('Your Server says Hello!!')
 // })
 
+app.use("/auth", authRouter)
 app.use("/users", userRouter)
 
 // app.listen(port, () => {

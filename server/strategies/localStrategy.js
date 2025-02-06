@@ -4,9 +4,10 @@ import { Strategy } from 'passport-local'
 export default passport.use(
   // passing in my instance
   new Strategy({ usernameField: 'email' }, (username, password, done) => {
+    console.log("username", username, "password", password)
     // search users in db
     try {
-    //   const findUser = userModel.findOne({ email: username })
+      // const findUser = userModel.findOne({ email: username })
 
       // no user found - err
       if (!findUser) {
