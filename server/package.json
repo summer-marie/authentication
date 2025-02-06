@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch index.js"
   },
   "type": "module",
@@ -16,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-sessions": "^1.0.6",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   }
