@@ -1,23 +1,66 @@
-import "dotenv/config"
-import express from "express"
-import cors from "cors"
-import session from "express-sessions"
-import cookieParser from "cookie-parser"
-import passport from "passport"
+import 'dotenv/config'
+import express from 'express'
+import cors from 'cors'
+import mongoose from "mongoose";
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import "./strategies/localStrategy.js"
+import userRouter from './user/userIndex.js'
 
-const cookieSecret = process.env.COOKIE_SECRET || "secret"
+const port = process.env.PORT || 8000
 
-const app = express();
-app.use(express.json());
+const cookieSecret = process.env.COOKIE_SECRET || 'secret'
+const sessionSecret = process.env.SESSION_SECRET || 'secret'
+
+const app = express()
+app.use(express.json())
 app.use(cookieParser(cookieSecret))
-app.use(cors());
-const port = 8000;
+app.use(cors())
+// Setup sessions
+app.use(
+  session({
+    secret: sessionSecret,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      MaxAge: 60000 * 60,
+    },
+  })
+)
+
+// Add Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// app.get('/', (req, res) => {
+//   res.send('Your Server says Hello!!')
+// })
+
+app.use("/users", userRouter)
+
+// app.listen(port, () => {
+//   console.log(`Template listening on port ${port}`)
+// })
+
+app.all('*', (req, res) =>{
+  res.status(404).json({
+      success: false,
+      data: '404'
+  })
+})
 
 
-app.get("/", (req, res) => {
-  res.send("Your Server says Hello!!");
-});
+try {
+  const mongoURL = process.env.MONGODB_URL || ""
+  await mongoose.connect(mongoURL)
+  console.log(`Template connected to database ${mongoURL}`)
 
-app.listen(port, () => {
-  console.log(`Template app listening on port ${port}`);
-});
+  app.listen(port, () => {
+    console.log(`Template app listening on port ${port}`)
+  })
+}
+catch(err) {
+  console.log(err)
+}
+

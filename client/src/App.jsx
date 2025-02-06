@@ -1,10 +1,7 @@
-import { useState } from "react";
-import "./App.css";
+import './App.css'
 
 function App() {
-
-
-  return <>Hello Template</>;
+  return <>Hello Template</>
 }
 
-export default App;
+export default App
