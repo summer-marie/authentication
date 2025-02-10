@@ -28,18 +28,19 @@ export default passport.use(
     // console.log('username', username, 'password', password)
     // search users in db
     try {
-      const findUser = await userModel.findOne({ email: username })
-      // console.log('findUser', findUser)
+      console.log("local strategy", username, password)
+      const user = await userModel.findOne({ email: username })
+      console.log('user', user)
       // no user found - err
-      if (!findUser) {
+      if (!user) {
         throw new Error('user not found')
       }
       // user found but password doesn't match - throw err
-      if (findUser.password !== password) {
+      if (user.password !== password) {
         throw new Error('user login info invalid')
       }
       // if both cases are false - call done function
-      done(null, findUser)
+      done(null, user)
     } catch (err) {
       done(err, null)
     }

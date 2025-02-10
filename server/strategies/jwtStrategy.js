@@ -18,9 +18,11 @@ passport.use(
       if (user) {
         return done(null, user)
       } else {
+        // Your not authenticated in the middleware
         return done(null, false)
       }
     } catch (err) {
+        // No user object found
       return done(err, null)
     }
   })

@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
+import './strategies/jwtStrategy.js'
 import "./strategies/localStrategy.js"
 import authRouter from "./auth/authIndex.js"
 import userRouter from './user/userIndex.js'
