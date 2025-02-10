@@ -3,12 +3,12 @@ import { Strategy } from 'passport-local'
 import userModel from '../user/userModel.js'
 
 passport.serializeUser((user, done) => {
-  console.log('serializeUser', user)
+  // console.log('serializeUser', user)
   done(null, user.id)
 })
 
 passport.deserializeUser(async (id, done) => {
-  console.log('deserializedUser', id)
+  // console.log('deserializedUser', id)
   try {
     // Both work, so i kept them both for ref.
     // const findUser = await userModel.findById(id)
@@ -25,11 +25,11 @@ passport.deserializeUser(async (id, done) => {
 export default passport.use(
   // passing in my instance
   new Strategy({ usernameField: 'email' }, async (username, password, done) => {
-    console.log('username', username, 'password', password)
+    // console.log('username', username, 'password', password)
     // search users in db
     try {
       const findUser = await userModel.findOne({ email: username })
-      console.log('findUser', findUser)
+      // console.log('findUser', findUser)
       // no user found - err
       if (!findUser) {
         throw new Error('user not found')
