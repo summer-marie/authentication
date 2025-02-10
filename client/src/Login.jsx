@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { login } from './auth/authService'
 
+// TODO: Add create new account option
+// TODO: Add styling to loading state
+
 const Login = () => {
   const navigate = useNavigate()
 
@@ -11,19 +14,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    console.log("Handle Submit")
     // Validation
-    if (loginForm.email === '' || loginForm.password === '') {
-      // Show error message/styling
-      console.log('form error')
-    } else {
-      // Service call to login
-      const checkLogin = await login(loginForm)
-      if (checkLogin.success && checkLogin.token) {
-        localStorage.setItem('token', checkLogin.token)
-        navigate('/dashboard')
-      }
-    }
+    // if (loginForm.email === '' || loginForm.password === '') {
+    //   // Show error message/styling
+    //   console.log('Login form error')
+    // } else {
+    //   // Service call to login
+    //   const checkLogin = await login(loginForm)
+    //   if (checkLogin.success && checkLogin.token) {
+    //     localStorage.setItem('token', checkLogin.token)
+    //     navigate('/dashboard')
+    //   }
+    // }
+    setLoading(true)
+    setTimeout(() => {
+        setLoading(false)
+    }, 2000)
   }
 
   return (
@@ -50,7 +57,9 @@ const Login = () => {
               }
               type="email"
               id="email"
-              className="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 dark:bg-slate-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-rose-950 hover:border-rose-300"
+              className="
+              disabled:text-gray-300
+               w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 dark:bg-slate-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-rose-950 hover:border-rose-300"
               placeholder="name@flowbite.com"
               autoComplete="email"
               disabled={loading}
@@ -72,7 +81,7 @@ const Login = () => {
               id="password"
               name="password"
               type="password"
-              className="w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500  block p-2.5 dark:bg-slate-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-rose-950 dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:border-rose-300"
+              className="disabled:text-gray-300 w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500  block p-2.5 dark:bg-slate-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-rose-950 dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:border-rose-300"
               required
               autoComplete="current-password"
               disabled={loading}
@@ -80,8 +89,11 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="text-white bg-rose-700 hover:bg-rose-800 focus:ring-2 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-80 px-5 py-2.5 text-center dark:bg-rose-950 dark:hover:bg-rose-950 dark:focus:ring-slate-900"
+            className="text-white bg-rose-700 hover:bg-rose-800 focus:ring-2 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-80 px-5 py-2.5 text-center dark:bg-rose-950 dark:hover:bg-rose-950 dark:focus:ring-slate-900 
+            disabled:cursor-not-allowed
+             "
             disabled={loading}
+            // disabled={true}
           >
             Sign in
           </button>

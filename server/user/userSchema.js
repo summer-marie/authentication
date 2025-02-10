@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const Schema = mongoose.Schema
 
 const sessionSchema = new Schema({
-  refreshToken: {
+  token: {
     type: String,
     default: ""
   }
@@ -30,7 +30,7 @@ const userSchema = new Schema({
     type: String,
     default: "local"
   },
-  refreshToken: {
+  token: {
     type: [ sessionSchema ]
   }
 })

@@ -10,6 +10,8 @@ export const login = async ({ email, password }) => {
   console.log('response', response.data)
   return response.data
 }
+
+
 export const status = async (token) => {
   console.log('authService status token', token)
   const response = await axios.get(

@@ -18,17 +18,9 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser(cookieSecret))
 app.use(cors())
-// Setup sessions
-app.use(
-  session({
-    secret: sessionSecret,
-    saveUninitialized: false,
-    resave: false,
-    cookie: {
-      MaxAge: 60000 * 60,
-    },
-  })
-)
+// Sessions, default
+app.use(session({}))
+
 
 // Add Passport
 app.use(passport.initialize());
