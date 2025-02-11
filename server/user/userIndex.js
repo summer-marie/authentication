@@ -4,6 +4,10 @@ import userCreate from './userCreate.js'
 
 const userRouter = Router()
 
-userRouter.post('/',  passport.authenticate("jwt", { session: false }), userCreate)
+userRouter.post('/', userCreate)
 
 export default userRouter
+
+
+
+// passport.authenticate("jwt", { session: false })

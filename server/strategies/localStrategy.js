@@ -1,5 +1,6 @@
 import passport from 'passport'
 import { Strategy } from 'passport-local'
+import * as argon2 from 'argon2'
 import userModel from '../user/userModel.js'
 
 passport.serializeUser((user, done) => {
@@ -26,18 +27,24 @@ export default passport.use(
   // passing in my instance
   new Strategy({ usernameField: 'email' }, async (username, password, done) => {
     // console.log('username', username, 'password', password)
+
     // search users in db
     try {
-      console.log("local strategy", username, password)
+      console.log('local strategy', username, password)
+
       const user = await userModel.findOne({ email: username })
+
+      // Comparing hashed values of PWs
+      const isPasswordCorrect = await argon2.verify(user.password, password)
+
       console.log('user', user)
-      // no user found - err
       if (!user) {
-        throw new Error('user not found')
+        // no user found - err
+        throw new Error('Invalid credentials')
       }
-      // user found but password doesn't match - throw err
-      if (user.password !== password) {
-        throw new Error('user login info invalid')
+      if (!isPasswordCorrect) {
+        // user found but password doesn't match - throw err
+        throw new Error('Invalid credentials')
       }
       // if both cases are false - call done function
       done(null, user)

@@ -27,12 +27,17 @@ const authLogin = async (req, res, next) => {
   const { _id } = req.user
   console.log('authLogin _id', _id)
   const token = createToken({ _id })
-  console.log('authLogin token', token)
+  console.log('authLogin/token', token)
   try {
     const user = await userModel.findOne({ _id })
-    console.log('authLogin user', user)
+    console.log('authLogin/user', user)
     //Lets you be logged in from multiple places at once
-    user.token.push({ token })
+    if (user.token) {
+      user.token.push({ token })
+    } else {
+      user.token = [{ token }]
+    }
+    user.save()
     res.cookie('token', token, cookieOptions)
     res.status(200).json({ success: true, token })
   } catch (err) {
