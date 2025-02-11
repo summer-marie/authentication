@@ -1,7 +1,6 @@
 
 // TODO: remove token from user record
 
-
 const authLogout = (req, res) => {
     if (!req.user) {
       res.status(401).json({ message: "Not authenticated." })

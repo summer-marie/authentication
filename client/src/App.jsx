@@ -1,21 +1,40 @@
 // /* eslint-disable no-unused-vars */
 import { Routes, Route } from 'react-router'
+import { useEffect, useState } from 'react'
 import Home from './Home'
 import Dashboard from './Dashboard'
 import PrivateRoute from './PrivateRoute'
 import Login from './Login'
 import NoMatch from './NoMatch'
+import Navbar from './Navbar'
 import './App.css'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    console.log('useEffect', isLoggedIn)
+  }, [isLoggedIn])
+  
   return (
     <>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login />}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>

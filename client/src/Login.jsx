@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
 import { useState, useEffect } from 'react'
@@ -7,7 +8,7 @@ import { login } from './auth/authService'
 // TODO: Add create new account option
 // TODO: Add styling to loading state
 
-const Login = () => {
+const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate()
 
   const [loginForm, setLoginForm] = useState({ email: '', password: '' })
@@ -24,17 +25,17 @@ const Login = () => {
       // Service call to login
       const checkLogin = await login(loginForm)
       console.log('Login handleSubmit checkLogin', checkLogin)
-
+      
       if (checkLogin.success && checkLogin.token) {
         localStorage.setItem('token', checkLogin.token)
         navigate('/dashboard')
       }
+      setIsLoggedIn(true)
     }
-    // setLoading(true)
-    // setTimeout(() => {
-    //     setLoading(false)
-    // }, 2000) }
   }
+  useEffect(() => {
+    console.log('useEffect', isLoggedIn)
+  }, [isLoggedIn])
 
   return (
     <>
