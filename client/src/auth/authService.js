@@ -13,16 +13,21 @@ export const login = async ({ email, password }) => {
 
 
 // export const status = async (token) => {
-//   console.log('authService status token', token)
-//   const response = await axios.get(
-//     `${import.meta.env.VITE_API_SERVER_URL}/auth/status`,
-//     {
-//       withCredentials: true,
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }
-//   )
-//   return response.data
+//   console.log("authService status token", token)
+//   return {}
 // }
+
+export const status = async (token) => {
+  console.log('authService status token', token)
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_SERVER_URL}/auth/status`,
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  return response.data
+}

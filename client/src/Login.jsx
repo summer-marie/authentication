@@ -15,16 +15,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Handle Submit")
+    console.log('Handle Submit')
     // Validation
-    // if (loginForm.email === '' || loginForm.password === '') {
-    //   // Show error message/styling
-    //   console.log('Login form error')
-    // } else {
-
+    if (loginForm.email === '' || loginForm.password === '') {
+      // Show error message/styling
+      console.log('Login form error')
+    } else {
       // Service call to login
       const checkLogin = await login(loginForm)
-      console.log("Login handleSubmit checkLogin", checkLogin)
+      console.log('Login handleSubmit checkLogin', checkLogin)
 
       if (checkLogin.success && checkLogin.token) {
         localStorage.setItem('token', checkLogin.token)
@@ -34,8 +33,8 @@ const Login = () => {
     // setLoading(true)
     // setTimeout(() => {
     //     setLoading(false)
-    // }, 2000)
-  
+    // }, 2000) }
+  }
 
   return (
     <>

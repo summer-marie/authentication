@@ -18,7 +18,28 @@ const sessionSecret = process.env.SESSION_SECRET || 'secret'
 const app = express()
 app.use(express.json())
 app.use(cookieParser(cookieSecret))
-app.use(cors())
+
+// CORS
+// Get whitelisted domains from env
+const whitelist = process.env.WHITELISTED_DOMAINS
+  ? process.env.WHITELISTED_DOMAINS.split(",")
+  : []
+// Set CORS options
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    }
+    else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true
+}
+// Use CORS
+app.use(cors(corsOptions))
+
+
 // Sessions, default
 app.use(session({}))
 
