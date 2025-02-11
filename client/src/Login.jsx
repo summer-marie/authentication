@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { login } from './auth/authService'
@@ -20,18 +21,21 @@ const Login = () => {
     //   // Show error message/styling
     //   console.log('Login form error')
     // } else {
-    //   // Service call to login
-    //   const checkLogin = await login(loginForm)
-    //   if (checkLogin.success && checkLogin.token) {
-    //     localStorage.setItem('token', checkLogin.token)
-    //     navigate('/dashboard')
-    //   }
-    // }
-    setLoading(true)
-    setTimeout(() => {
-        setLoading(false)
-    }, 2000)
-  }
+
+      // Service call to login
+      const checkLogin = await login(loginForm)
+      console.log("Login handleSubmit checkLogin", checkLogin)
+
+      if (checkLogin.success && checkLogin.token) {
+        localStorage.setItem('token', checkLogin.token)
+        navigate('/dashboard')
+      }
+    }
+    // setLoading(true)
+    // setTimeout(() => {
+    //     setLoading(false)
+    // }, 2000)
+  
 
   return (
     <>
