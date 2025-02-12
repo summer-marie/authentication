@@ -10,31 +10,28 @@ import Navbar from './Navbar'
 import './App.css'
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+  // const userState = () => {
+  //   if (login === true) {
+  //     setIsLoggedIn(true)
+  //   } else {
+  //     setIsLoggedIn(false)
+  //   }
+  // }
 
-  useEffect(() => {
-    console.log('useEffect', isLoggedIn)
-  }, [isLoggedIn])
-  
+  // useEffect(() => {
+  //   console.log('useEffect', isLoggedIn)
+  // }, [isLoggedIn])
+
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<PrivateRoute />}>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        <Route
-          path="/login"
-          element={<Login />}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-        />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>

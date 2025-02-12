@@ -39,7 +39,7 @@ export const logout = async (token) => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }
-  )   
+  )
   localStorage.removeItem('token')
 
   return response.data

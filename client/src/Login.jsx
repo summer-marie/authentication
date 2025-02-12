@@ -8,7 +8,7 @@ import { login } from './auth/authService'
 // TODO: Add create new account option
 // TODO: Add styling to loading state
 
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+const Login = () => {
   const navigate = useNavigate()
 
   const [loginForm, setLoginForm] = useState({ email: '', password: '' })
@@ -25,17 +25,15 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
       // Service call to login
       const checkLogin = await login(loginForm)
       console.log('Login handleSubmit checkLogin', checkLogin)
-      
+
       if (checkLogin.success && checkLogin.token) {
+        // setIsLoggedIn(true)
         localStorage.setItem('token', checkLogin.token)
         navigate('/dashboard')
       }
-      setIsLoggedIn(true)
     }
   }
-  useEffect(() => {
-    console.log('useEffect', isLoggedIn)
-  }, [isLoggedIn])
+
 
   return (
     <>

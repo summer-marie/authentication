@@ -4,23 +4,20 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { logout } from './auth/authService'
 
-const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
+const Navbar = () => {
   const navigate = useNavigate()
   // Redux state
   //  const { isLoggedIn } = useSelector((state) => state.auth)
   // const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('useEffect', isLoggedIn)
-  }, [isLoggedIn])
 
   const handleLogout = async () => {
     console.log('handle Logout')
     // Remove from Redux state
     const token = localStorage.getItem('token')
     logout(token)
+    // setIsLoggedIn(false)
     // Redirect to login page
-    setIsLoggedIn(false)
     navigate('/login')
   }
 
@@ -39,14 +36,14 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               (555) 412-1234
             </Link> */}
-            {!isLoggedIn ? (
+            {/* {!isLoggedIn ? ( */}
               <span
                 onClick={handleLogout}
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-transparent hover:text-sky-700 md:p-0 dark:text-sky-600 dark:text-white dark:hover:text-sky-500  dark:border-gray-700 cursor-pointer"
               >
                 Logout
               </span>
-            ) : (
+            {/* ) : ( */}
               <Link
                 onClick={() => navigate('/login')}
                 to="/login"
@@ -54,7 +51,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
               >
                 Login
               </Link>
-            )}
+            {/* )} */}
           </div>
         </div>
       </nav>
