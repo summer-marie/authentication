@@ -10,7 +10,7 @@ import "./strategies/localStrategy.js"
 import authRouter from "./auth/authIndex.js"
 import userRouter from './user/userIndex.js'
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8008
 
 const cookieSecret = process.env.COOKIE_SECRET || 'secret'
 const sessionSecret = process.env.SESSION_SECRET || 'secret'
