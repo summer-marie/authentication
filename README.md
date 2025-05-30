@@ -13,3 +13,6 @@ TOKEN_EXPIRATION=2592000
 WHITELISTED_DOMAINS=http://localhost:3003
 
 - Client: VITE_API_SERVER_URL=http://localhost:8008
+
+to run test users to create a new DB 
+- npm run user

@@ -11,6 +11,7 @@ const generateFakeUser = () => {
     firstName,
     lastName,
     email: faker.internet.email({ firstName: firstName.toLowerCase(), lastName: lastName.toLowerCase() }),
+    // email: "blah@blah.com",
     // username: faker.internet.username({ firstName, lastName }),
     password: 'test',
   }

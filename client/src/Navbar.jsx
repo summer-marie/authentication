@@ -39,7 +39,7 @@ const Navbar = () => {
             >
               (555) 412-1234
             </Link> */}
-            {token ? (
+            {/* {token ? ( */}
               <span
                 onClick={handleLogout}
                 className={` ${
@@ -50,7 +50,7 @@ const Navbar = () => {
               >
                 Logout
               </span>
-            ) : (
+            {/* // ) : ( */}
               <Link
                 onClick={() => navigate('/login')}
                 to='/login'
@@ -62,7 +62,7 @@ const Navbar = () => {
               >
                 Login
               </Link>
-            )}
+            {/* )} */}
           </div>
         </div>
       </nav>
